@@ -130,3 +130,39 @@ stages:
       hash: md5
       md5: f33bae46f2888336121b78c10eb03c5b
       size: 924
+  interpret_results:
+    cmd: python src/interpret_results.py
+    deps:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 170e2653a3837ace711b4a27cb97fa95
+      size: 16011
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: 83efc4c3be6c619c9372d5216302ab75
+      size: 2253
+    - path: models/best_model.joblib
+      hash: md5
+      md5: 896c526aaefde45c20278395026bad38
+      size: 1361
+    - path: src/interpret_results.py
+      hash: md5
+      md5: a1e5a57ae0b88f4eb186b55ddb246f50
+      size: 1820
+    outs:
+    - path: results/feature_importances.csv
+      hash: md5
+      md5: 2fa802b872c6adbc43e0b534b8295201
+      size: 497
+    - path: results/interpretation_results.txt
+      hash: md5
+      md5: 0261cee3db66b64efac86a500ad09baf
+      size: 71
+    - path: results/metrics.csv
+      hash: md5
+      md5: 385c4ad81a39a7a6838f27155855ad77
+      size: 68
+    - path: results/metrics.md
+      hash: md5
+      md5: 8f0e7c387bd523036b86fd1f03bf12f6
+      size: 134

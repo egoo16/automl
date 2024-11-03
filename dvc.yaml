@@ -26,3 +26,16 @@ stages:
     outs:
       - models/best_model.py
       - models/best_model.joblib
+
+  interpret_results:
+    cmd: python src/interpret_results.py
+    deps:
+      - src/interpret_results.py
+      - models/best_model.joblib
+      - data/processed/X_test.csv
+      - data/processed/y_test.csv
+    outs:
+      - results/interpretation_results.txt
+      - results/metrics.csv
+      - results/metrics.md
+      - results/feature_importances.csv
