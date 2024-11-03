@@ -119,14 +119,14 @@ stages:
       size: 9075
     - path: src/automl_training.py
       hash: md5
-      md5: 3d8ac2231d60a749bdf3f9bdd838219b
-      size: 1478
+      md5: 2347cf6a372013e86c21590c284920be
+      size: 1192
     outs:
-    - path: models/automl_results.txt
-      hash: md5
-      md5: f383aba526afadf271efd4bc27d4612b
-      size: 82
     - path: models/best_model.joblib
       hash: md5
       md5: 896c526aaefde45c20278395026bad38
       size: 1361
+    - path: models/best_model.py
+      hash: md5
+      md5: f33bae46f2888336121b78c10eb03c5b
+      size: 924
