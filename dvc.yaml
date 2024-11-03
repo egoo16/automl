@@ -1,0 +1,16 @@
+stages:
+  explore_data:
+    cmd: python src/data_exploration.py data/data.csv
+    deps:
+      - src/data_exploration.py
+      - data/data.csv
+    outs:
+      - data/exploration_results
+
+  preprocess_data:
+    cmd: python src/data_preprocessing.py data/data.csv
+    deps:
+      - src/data_preprocessing.py
+      - data/data.csv
+    outs:
+      - data/processed
