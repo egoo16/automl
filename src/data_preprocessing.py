@@ -1,10 +1,9 @@
-# src/data_preprocessing.py
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-import numpy as np
+from sklearn.preprocessing import StandardScaler
 import sys
 import os
+import yaml
 
 output_dir = "data/processed"
 os.makedirs(output_dir, exist_ok=True)
@@ -26,19 +25,28 @@ def preprocess_data(df):
 
     return df
 
-def split_data(df, test_size=0.2, random_state=42):
-    X = df.drop("target_column", axis=1)  # Reemplaza "target_column" con el nombre de tu variable objetivo
-    y = df["target_column"]  # Reemplaza "target_column" con el nombre de tu variable objetivo
+def split_data(df, test_size=0.2, random_state=42, target_column='price'):
+    X = df.drop(target_column, axis=1) 
+    y = df[target_column]  
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
 
     return X_train, X_test, y_train, y_test
 
 if __name__ == "__main__":
+    with open("params.yaml") as f:
+        params = yaml.safe_load(f)
+
     filepath = sys.argv[1]
+    
+    # Cargar parámetros de params.yaml
+    test_size = params["train"]["test_size"]
+    random_state = params["train"]["random_state"]
+    target_column = params["preprocessing"]["target"]
+
     df = load_data(filepath)
     df = preprocess_data(df)
-    X_train, X_test, y_train, y_test = split_data(df)
+    X_train, X_test, y_train, y_test = split_data(df, test_size=test_size, random_state=random_state, target_column=target_column)
 
     # Guardar los conjuntos de entrenamiento y prueba
     X_train.to_csv(f"{output_dir}/X_train.csv", index=False)

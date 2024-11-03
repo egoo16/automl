@@ -9,11 +9,124 @@ stages:
       size: 29981
     - path: src/data_exploration.py
       hash: md5
-      md5: 0586d7d5279f540051e8f36e732615b4
-      size: 1677
+      md5: 59d6960f7715e9da81ba5f5d6cbc21a9
+      size: 1650
     outs:
     - path: data/exploration_results
       hash: md5
       md5: b001c4cf57f83c7fcb1c5f5a79a72f19.dir
       size: 156325
       nfiles: 9
+  preprocess_data:
+    cmd: python src/data_preprocessing.py data/data.csv
+    deps:
+    - path: data/data.csv
+      hash: md5
+      md5: 801f8030dad1df22a53edfdbfa4e80f0
+      size: 29981
+    - path: src/data_preprocessing.py
+      hash: md5
+      md5: 379b753862bd3041d30767f5b11a0600
+      size: 1909
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 706209724cad9782ae86a3b3690fa353.dir
+      size: 90866
+      nfiles: 4
+  train_models:
+    cmd: python src/model_training.py
+    deps:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 170e2653a3837ace711b4a27cb97fa95
+      size: 16011
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: b70512e35a4238b4a8789d9241c767f9
+      size: 63527
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: 83efc4c3be6c619c9372d5216302ab75
+      size: 2253
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 6bb987fc33343787df2592d600734eb5
+      size: 9075
+    - path: src/model_training.py
+      hash: md5
+      md5: d113f2e09db7933979b48568f49d64e6
+      size: 1833
+    outs:
+    - path: models/train/GradientBoosting.joblib
+      hash: md5
+      md5: a4db34b9e016016b81f6104421b3d9d1
+      size: 191544
+    - path: models/train/LinearRegression.joblib
+      hash: md5
+      md5: b64975f8424095adb23cbd1f6fb743c9
+      size: 1313
+    - path: models/train/RandomForest.joblib
+      hash: md5
+      md5: 84c31b765d4a67bfda095bc5b8731dc3
+      size: 3838545
+    - path: models/train/results.txt
+      hash: md5
+      md5: 525b9b39ec6dd989bf5cb4bc68431c75
+      size: 128
+  optimize_model:
+    cmd: python src/model_optimization.py
+    deps:
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: b70512e35a4238b4a8789d9241c767f9
+      size: 63527
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 6bb987fc33343787df2592d600734eb5
+      size: 9075
+    outs:
+    - path: models/optimize/GradientBoosting_optimized.joblib
+      hash: md5
+      md5: b47df5b9bf074ea86cc182e78467b33c
+      size: 105432
+    - path: models/optimize/RandomForest_optimized.joblib
+      hash: md5
+      md5: b1d29b9049155678b2a68beae253db00
+      size: 1369473
+    - path: models/optimize/optimization_results.txt
+      hash: md5
+      md5: 731f32b8d7fcbe82b77fda9c237046ac
+      size: 239
+  automl_training:
+    cmd: python src/automl_training.py
+    deps:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 170e2653a3837ace711b4a27cb97fa95
+      size: 16011
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: b70512e35a4238b4a8789d9241c767f9
+      size: 63527
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: 83efc4c3be6c619c9372d5216302ab75
+      size: 2253
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 6bb987fc33343787df2592d600734eb5
+      size: 9075
+    - path: src/automl_training.py
+      hash: md5
+      md5: 3d8ac2231d60a749bdf3f9bdd838219b
+      size: 1478
+    outs:
+    - path: models/automl_results.txt
+      hash: md5
+      md5: f383aba526afadf271efd4bc27d4612b
+      size: 82
+    - path: models/best_model.joblib
+      hash: md5
+      md5: 896c526aaefde45c20278395026bad38
+      size: 1361

@@ -14,3 +14,15 @@ stages:
       - data/data.csv
     outs:
       - data/processed
+
+  automl_training:
+    cmd: python src/automl_training.py
+    deps:
+      - src/automl_training.py
+      - data/processed/X_train.csv
+      - data/processed/X_test.csv
+      - data/processed/y_train.csv
+      - data/processed/y_test.csv
+    outs:
+      - models/best_model.joblib
+      - models/automl_results.txt
