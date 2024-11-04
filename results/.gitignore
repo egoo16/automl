@@ -2,3 +2,7 @@
 /metrics.csv
 /metrics.md
 /feature_importances.csv
+/optuna_best_params.txt
+/optuna_optimization_history.html
+/optuna_param_importance.html
+/best_hyperparameters.joblib

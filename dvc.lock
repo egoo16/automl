@@ -166,3 +166,35 @@ stages:
       hash: md5
       md5: 8f0e7c387bd523036b86fd1f03bf12f6
       size: 134
+  hyperparameter_optimization:
+    cmd: python src/hyperparameter_optimization.py
+    deps:
+    - path: data/processed/X_train.csv
+      hash: md5
+      md5: b70512e35a4238b4a8789d9241c767f9
+      size: 63527
+    - path: data/processed/y_train.csv
+      hash: md5
+      md5: 6bb987fc33343787df2592d600734eb5
+      size: 9075
+    - path: src/hyperparameter_optimization.py
+      hash: md5
+      md5: ac8c2a36ff605cce1dd99bb42dd982ed
+      size: 2588
+    outs:
+    - path: results/best_hyperparameters.joblib
+      hash: md5
+      md5: b68e92c2468844e0cabb8b71e8699f08
+      size: 494
+    - path: results/optuna_best_params.txt
+      hash: md5
+      md5: d4e15f8e5fd158a5c9ffc1eaffb609ac
+      size: 87
+    - path: results/optuna_optimization_history.html
+      hash: md5
+      md5: 4029fe1e9c24f29529c2daf7f940be67
+      size: 4569117
+    - path: results/optuna_param_importance.html
+      hash: md5
+      md5: ecc024c5e460383c49e3d2c6ecd5dbe4
+      size: 4567045

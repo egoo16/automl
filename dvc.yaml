@@ -39,3 +39,16 @@ stages:
       - results/metrics.csv
       - results/metrics.md
       - results/feature_importances.csv
+
+
+  hyperparameter_optimization:
+    cmd: python src/hyperparameter_optimization.py
+    deps:
+      - src/hyperparameter_optimization.py
+      - data/processed/X_train.csv
+      - data/processed/y_train.csv
+    outs:
+      - results/best_hyperparameters.joblib
+      - results/optuna_best_params.txt
+      - results/optuna_optimization_history.html
+      - results/optuna_param_importance.html
